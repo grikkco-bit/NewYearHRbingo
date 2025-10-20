@@ -5,6 +5,13 @@ let ICONS = [
   { url: "icons/egor2.jpg", title: "Егор2", attribute: "дизайнер" },
   { url: "icons/egor3.jpg", title: "Егор3", attribute: "стратег" },
   { url: "icons/egor4.jpg", title: "Егор4", attribute: "аналитик" },
+  { url: "icons/Тимофей.jpg", title: "Тимофей", attribute: "аналитик" },
+  { url: "icons/Тимофей2.jpg", title: "Тимофей2", attribute: "аналитик" },
+  { url: "icons/Тимофей3.jpg", title: "Тимофей3", attribute: "аналитик" },
+  { url: "icons/Тимофей4.jpg", title: "Тимофей4", attribute: "аналитик" },
+  { url: "icons/Тимофей5.jpg", title: "Тимофей5", attribute: "аналитик" },
+  { url: "icons/тимофей6.jpg", title: "тимофей6", attribute: "аналитик" },
+  { url: "icons/тимофей7.jpg", title: "тимофей7", attribute: "аналитик" },
   // если добавите новые файлы сюда, укажите attribute: one of [инноватор, инженер, дизайнер, стратег, хакер, аналитик]
 ];
 
