@@ -126,7 +126,12 @@ button:hover{opacity:0.95}
 .cell.free{
   background:linear-gradient(180deg,#fff9e6,#fff5db);
 }
-.cell.free img{filter: none; transform:scale(1.06); width:42%; height:42%;}
+.cell.free img{
+  filter: none;
+  transform:scale(1.02);
+  width:95%;
+  height:95%;
+}
 
 /* make center non-interactive image */
 .cell.free img{pointer-events:none}
