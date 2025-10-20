@@ -268,12 +268,12 @@ function hashStrings(arr){
 }
 
 const RESULT_TEMPLATES = [
-  { attribute: 'инноватор', title: 'Ты и Егор', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor-lyubimyi.jpg' },
-  { attribute: 'инженер', title: 'Ты и Ярослав', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor.jpg' },
-  { attribute: 'дизайнер', title: 'Ты и Саша Соболев', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor2.jpg' },
-  { attribute: 'стратег', title: 'Ты и Рома', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor3.jpg' },
-  { attribute: 'хакер', title: 'Ты и Саша Никольский', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor4.jpg' },
-  { attribute: 'аналитик', title: 'Ты и Тимофей', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor4.jpg' }
+  { attribute: 'инноватор', title: 'Ты и Егор', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
+  { attribute: 'инженер', title: 'Ты и Ярослав', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
+  { attribute: 'дизайнер', title: 'Ты и Саша Соболев', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
+  { attribute: 'стратег', title: 'Ты и Рома', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
+  { attribute: 'хакер', title: 'Ты и Саша Никольский', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
+  { attribute: 'аналитик', title: 'Ты и Тимофей', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' }
 ];
 
 function computeResult(){
