@@ -332,16 +332,6 @@ if (showResultBtn) {
   showResultBtn.addEventListener('click', () => showResultModal(false));
 }
 closeResultBtn.addEventListener('click', closeModal);
-shareResultBtn.addEventListener('click', () => {
-  // try Web Share API or fallback to copying text
-  const res = computeResult();
-  const shareText = ${res.title}: ${res.text};
-  if (navigator.share) {
-    navigator.share({ title: res.title, text: res.text }).catch(()=>{});
-  } else {
-    navigator.clipboard?.writeText(shareText).then(()=> alert('Результат скопирован в буфер обмена'));
-  }
-});
 closeBtn.addEventListener('click', closeModal);
 
 
