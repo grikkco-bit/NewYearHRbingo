@@ -333,7 +333,6 @@ if (showResultBtn) {
 }
 closeResultBtn.addEventListener('click', closeModal);
 closeBtn.addEventListener('click', closeModal);
-modalNewGameBtn.addEventListener('click', () => { closeModal(); buildGrid(); });
 shareResultBtn.addEventListener('click', () => {
   // try Web Share API or fallback to copying text
   const res = computeResult();
