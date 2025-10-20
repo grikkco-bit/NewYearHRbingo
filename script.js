@@ -320,7 +320,7 @@ function showResultModal(isWin = false){
   const res = computeResult();
   resultTitle.innerText = res.title + (isWin ? ' — БИНГО!' : '');
   resultText.innerText = res.text;
-  resultImage.src = res.img || 'icons/star.svg';
+  resultImage.src = res.img || 'icons/fototeam.png';
   resultModal.setAttribute('aria-hidden','false');
 }
 
