@@ -261,12 +261,12 @@ function hashStrings(arr){
 }
 
 const RESULT_TEMPLATES = [
-  { attribute: 'инноватор', title: 'Инноватор', text: 'Вы генерируете новые идеи и видите нестандартные решения.', img: 'icons/egor-lyubimyi.jpg' },
-  { attribute: 'инженер', title: 'Инженер', text: 'Вы любите надёжные архитектуры и практичные решения.', img: 'icons/egor.jpg' },
-  { attribute: 'дизайнер', title: 'Дизайнер', text: 'Ваш фокус — UX, визуальная часть и опыт пользователя.', img: 'icons/egor2.jpg' },
-  { attribute: 'стратег', title: 'Стратег', text: 'Вы мыслите в терминах ценности и долгосрочных целей.', img: 'icons/egor3.jpg' },
-  { attribute: 'хакер', title: 'Хакер', text: 'Любите прототипы, быстрое тестирование идей и пайплайны.', img: 'icons/egor4.jpg' },
-  { attribute: 'аналитик', title: 'Аналитик', text: 'Вам важны данные, метрики и точные метрики успеха.', img: 'icons/star.svg' }
+  { attribute: 'инноватор', title: 'Ты и Егор', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor-lyubimyi.jpg' },
+  { attribute: 'инженер', title: 'Ты и Ярослав', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor.jpg' },
+  { attribute: 'дизайнер', title: 'Ты и Саша Соболев', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor2.jpg' },
+  { attribute: 'стратег', title: 'Ты и Рома', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor3.jpg' },
+  { attribute: 'хакер', title: 'Ты и Саша Никольский', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor4.jpg' },
+  { attribute: 'аналитик', title: 'Ты и Тимофей', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/egor4.jpg' }
 ];
 
 function computeResult(){
