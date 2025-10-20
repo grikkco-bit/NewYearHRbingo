@@ -100,7 +100,7 @@ button:hover{opacity:0.95}
 .cell .overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg, rgba(46,204,113,0.14), rgba(46,204,113,0.10));
+  background:linear-gradient(180deg, rgba(196,46,204,0.13), rgba(255,245,219,0.10));
   opacity:0;
   transition:opacity .14s ease;
   display:flex;

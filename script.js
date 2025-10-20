@@ -1,17 +1,17 @@
 // local icons (auto-generated from files in ./icons/)
 let ICONS = [
   { url: "icons/egor-lyubimyi.jpg", title: "Егор (любимый)", attribute: "инноватор" },
-  { url: "icons/egor.jpg", title: "Егор", attribute: "инженер" },
-  { url: "icons/egor2.jpg", title: "Егор2", attribute: "дизайнер" },
-  { url: "icons/egor3.jpg", title: "Егор3", attribute: "стратег" },
-  { url: "icons/egor4.jpg", title: "Егор4", attribute: "аналитик" },
-  { url: "icons/Тимофей.jpg", title: "Тимофей", attribute: "аналитик" },
-  { url: "icons/Тимофей2.jpg", title: "Тимофей2", attribute: "аналитик" },
-  { url: "icons/Тимофей3.jpg", title: "Тимофей3", attribute: "аналитик" },
-  { url: "icons/Тимофей4.jpg", title: "Тимофей4", attribute: "аналитик" },
-  { url: "icons/Тимофей5.jpg", title: "Тимофей5", attribute: "аналитик" },
-  { url: "icons/тимофей6.jpg", title: "тимофей6", attribute: "аналитик" },
-  { url: "icons/тимофей7.jpg", title: "тимофей7", attribute: "аналитик" },
+  { url: "icons/egor.jpg", title: "Егор", attribute: "инноватор" },
+  { url: "icons/egor2.jpg", title: "Егор2", attribute: "инноватор" },
+  { url: "icons/egor3.jpg", title: "Егор3", attribute: "инноватор" },
+  { url: "icons/egor4.jpg", title: "Егор4", attribute: "инноватор" },
+  { url: "icons/tim.jpg", title: "Тимофей", attribute: "инноватор" },
+  { url: "icons/tim2.jpg", title: "Тимофей2", attribute: "аналитик" },
+  { url: "icons/tim3.jpg", title: "Тимофей3", attribute: "аналитик" },
+  { url: "icons/tim4.jpg", title: "Тимофей4", attribute: "аналитик" },
+  { url: "icons/tim5.jpg", title: "Тимофей5", attribute: "аналитик" },
+  { url: "icons/tim6.jpg", title: "тимофей6", attribute: "аналитик" },
+  { url: "icons/tim7.jpg", title: "тимофей7", attribute: "аналитик" },
   // если добавите новые файлы сюда, укажите attribute: one of [инноватор, инженер, дизайнер, стратег, хакер, аналитик]
 ];
 
