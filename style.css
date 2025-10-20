@@ -85,8 +85,9 @@ button:hover{opacity:0.95}
 }
 .cell:hover{transform:translateY(-4px); box-shadow:0 8px 20px rgba(2,6,23,0.08);}
 .cell img{
-  width:56%;
-  height:56%;
+  /* Make image fill the cell more — reduce gap by ~90% */
+  width:95%;
+  height:95%;
   object-fit:contain;
   filter:grayscale(0.06) contrast(0.95);
   transition:transform .18s ease;
@@ -139,7 +140,8 @@ button:hover{opacity:0.95}
 /* Small screens */
 @media(max-width:520px){
   :root{--size:92vmin}
-  .cell img{width:64%; height:64%}
+  /* mobile: also reduce gap — make images almost full-size in cell */
+  .cell img{width:96%; height:96%}
   button{padding:8px 12px}
 }
 
