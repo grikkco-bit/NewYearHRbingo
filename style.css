@@ -56,6 +56,65 @@ body::after {
   letter-spacing: 20px;
 }
 
+/* Снежинки */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(100px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes snowfall-slow {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(150px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes snowfall-fast {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px);
+    opacity: 0.3;
+  }
+}
+
+.snowflake {
+  position: fixed;
+  top: -10vh;
+  pointer-events: none;
+  font-size: 20px;
+  z-index: 1;
+  opacity: 0.8;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.snowflake.size-small {
+  font-size: 12px;
+  animation: snowfall-fast 12s linear infinite;
+}
+
+.snowflake.size-medium {
+  font-size: 18px;
+  animation: snowfall 15s linear infinite;
+}
+
+.snowflake.size-large {
+  font-size: 24px;
+  animation: snowfall-slow 18s linear infinite;
+}
+
 .container{
   width:100%;
   max-width:960px;
@@ -216,8 +275,8 @@ button:hover{opacity:0.95; box-shadow:0 6px 20px rgba(196, 30, 58, 0.4)}
   border-radius:8px;
   background: rgba(196, 30, 58, 0.15);
   font-weight:600;
-  color: #c41e3a;
-  border: 1px solid rgba(196, 30, 58, 0.3);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Modal */

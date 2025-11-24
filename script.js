@@ -77,8 +77,8 @@ function buildGrid(){
       cell.classList.add("free", "marked");
       const text = document.createElement("div");
       text.className = "cell-text";
-      text.innerText = "Minervasoft";
-      text.title = "Minervasoft";
+      text.innerText = "HR выходного дня";
+      text.title = "HR выходного дня";
       cell.appendChild(text);
     } else {
       const icon = pool[p++];
@@ -344,6 +344,25 @@ shareResultBtn.addEventListener('click', () => {
 });
 closeBtn.addEventListener('click', closeModal);
 
+// Create animated snowflakes
+function createSnowflakes() {
+  const snowflakesContainer = document.body;
+  const snowflakeCount = 30; // количество снежинок
+  const sizes = ['size-small', 'size-medium', 'size-large'];
+  
+  for (let i = 0; i < snowflakeCount; i++) {
+    const snowflake = document.createElement('div');
+    snowflake.className = `snowflake ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+    snowflake.innerHTML = '❄️';
+    snowflake.style.left = Math.random() * 100 + '%';
+    snowflake.style.animationDelay = Math.random() * 20 + 's';
+    snowflake.style.opacity = Math.random() * 0.5 + 0.4;
+    snowflakesContainer.appendChild(snowflake);
+  }
+}
+
+// Initialize snowflakes when page loads
+document.addEventListener('DOMContentLoaded', createSnowflakes);
 
 // build first game on load
 buildGrid();
