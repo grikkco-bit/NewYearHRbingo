@@ -4,23 +4,23 @@ let ICONS = [
   { text: "Вместо премии дали ветку", title: "Егор", attribute: "инноватор" },
   { text: "Не успели забронировать площадку", title: "Егор2", attribute: "инноватор" },
   { text: "Николай напьется и будет петь караоке", title: "Егор3", attribute: "инноватор" },
-  { text: """А нам хватит еды?""", title: "Егор4", attribute: "инноватор" },
-  { text: "Тимофей", title: "Тимофей", attribute: "инноватор" },
-  { text: "Тимофей2", title: "Тимофей2", attribute: "аналитик" },
-  { text: "Тимофей3", title: "Тимофей3", attribute: "аналитик" },
-  { text: "Тимофей4", title: "Тимофей4", attribute: "аналитик" },
-  { text: "Тимофей5", title: "Тимофей5", attribute: "аналитик" },
-  { text: "Тимофей6", title: "тимофей6", attribute: "аналитик" },
-  { text: "Тимофей7", title: "тимофей7", attribute: "аналитик" },
+  { text: "А нам хватит еды?", title: "Егор4", attribute: "инноватор" },
+  { text: "А премия будет?", title: "Тимофей", attribute: "инноватор" },
+  { text: "Нам не нравится этот ваш маскарад", title: "Тимофей2", attribute: "аналитик" },
+  { text: "Что подарить детям", title: "Тимофей3", attribute: "аналитик" },
+  { text: "111", title: "Тимофей4", attribute: "аналитик" },
+  { text: "2222", title: "Тимофей5", attribute: "аналитик" },
+  { text: "333", title: "тимофей6", attribute: "аналитик" },
+  { text: "444", title: "тимофей7", attribute: "аналитик" },
   // если добавите новые, укажите attribute: one of [инноватор, инженер, дизайнер, стратег, хакер, аналитик]
 ];
 
 // filter out items without text (legacy - for backward compatibility)
 // ICONS = ICONS.filter(i => i.text);
 
-const GRID_SIZE = 5;
+const GRID_SIZE = 4;
 const TOTAL_CELLS = GRID_SIZE * GRID_SIZE;
-const CENTER = Math.floor(TOTAL_CELLS / 2);
+const CENTER = -1; // 4x4 не имеет центра, используем -1
 
 const bingoEl = document.getElementById("bingo");
 const newGameBtn = document.getElementById("newGameBtn");
@@ -49,15 +49,15 @@ function buildGrid(){
   if (pool.length === 0) {
     console.warn("ICONS пустой — добавьте хотя бы одну иконку в массив ICONS или в папку icons/");
     // provide a minimal fallback (will show the star repeatedly)
-    pool = [{ url: "icons/star.svg", title: "Свободное место" }];
+    pool = [{ text: "Нет", title: "Нет" }];
   }
-  // repeat available icons until we have at least 24 entries
-  while (pool.length < 24) {
+  // repeat available icons until we have at least 16 entries (for 4x4)
+  while (pool.length < 16) {
     pool = pool.concat(shuffle(ICONS));
   }
-  pool = shuffle(pool).slice(0, 24);
+  pool = shuffle(pool).slice(0, 16);
 
-  // create 25 cells
+  // create 16 cells (4x4)
   for (let i = 0, p = 0; i < TOTAL_CELLS; i++){
     const cell = document.createElement("div");
     cell.className = "cell";
@@ -72,52 +72,36 @@ function buildGrid(){
     overlay.appendChild(check);
     cell.appendChild(overlay);
 
-    if (i === CENTER){
-      // free space
-      cell.classList.add("free", "marked");
-      const text = document.createElement("div");
-      text.className = "cell-text";
-      text.innerText = "HR выходного дня";
-      text.title = "HR выходного дня";
-      cell.appendChild(text);
-    } else {
-      const icon = pool[p++];
-      const text = document.createElement("div");
-      text.className = "cell-text";
-      text.innerText = icon.text;
-      text.title = icon.title;
-      cell.appendChild(text);
-    }
+    // все ячейки одинаковые в 4x4 (нет центра)
+    const icon = pool[p++];
+    const text = document.createElement("div");
+    text.className = "cell-text";
+    text.innerText = icon.text;
+    text.title = icon.title;
+    cell.appendChild(text);
 
-    // click handler (center is already marked but still shouldn't toggle)
+    // click handler
     cell.addEventListener("click", () => toggleCell(i));
     bingoEl.appendChild(cell);
-    cells.push({ el: cell, marked: cell.classList.contains("marked"), index: i });
+    cells.push({ el: cell, marked: false, index: i });
   }
   updateSelectionCounter();
 }
 
 function toggleCell(index){
   if (hasWon) return; // prevent toggling after win until new game
-  if (index === CENTER) return; // center is fixed free space
+  if (index === CENTER) return; // center is fixed free space (but CENTER = -1 now, so this won't trigger)
 
   const cellObj = cells[index];
   const el = cellObj.el;
-  // if currently unmarked and already 5 selected, prevent further selection
-  const currentlySelected = cells.filter(c => c.marked && c.index !== CENTER).length;
-  if (!cellObj.marked && currentlySelected >= 5) {
-    // brief pulse feedback
-    el.style.transform = 'scale(0.98)';
-    setTimeout(()=> el.style.transform = '', 120);
-    return;
-  }
-
+  // in 4x4, no limit on selection count - select all 16 cells
+  
   cellObj.marked = !cellObj.marked;
   el.classList.toggle("marked", cellObj.marked);
-  // if we've reached exactly 5 selections, auto-show result
-  const afterSelected = cells.filter(c => c.marked && c.index !== CENTER).length;
+  // if we've reached exactly 3 selections, auto-show result
+  const afterSelected = cells.filter(c => c.marked).length;
   updateSelectionCounter();
-  if (afterSelected === 5) {
+  if (afterSelected === 3) {
     setTimeout(()=> showResultModal(false), 220);
   }
   checkWin();
@@ -125,8 +109,8 @@ function toggleCell(index){
 
 function updateSelectionCounter(){
   if (!selectionCounterEl) return;
-  const count = cells.filter(c => c.marked && c.index !== CENTER).length;
-  selectionCounterEl.innerText = `Выбрано ${count}/5`;
+  const count = cells.filter(c => c.marked).length;
+  selectionCounterEl.innerText = `Выбрано ${count}/3`;
 }
 
 function getMarkedMatrix(){
@@ -245,8 +229,8 @@ const resultText = document.getElementById('resultText');
 const resultImage = document.getElementById('resultImage');
 
 function getSelectedIcons(){
-  // return array of {text, attribute} of marked cells (excluding center)
-  return cells.filter((c, idx) => c.marked && idx !== CENTER).map(c => {
+  // return array of {text, attribute} of marked cells
+  return cells.filter(c => c.marked).map(c => {
     const textDiv = c.el.querySelector('.cell-text');
     if (!textDiv) return null;
     const text = textDiv.innerText || textDiv.textContent;
