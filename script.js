@@ -347,22 +347,33 @@ closeBtn.addEventListener('click', closeModal);
 // Create animated snowflakes
 function createSnowflakes() {
   const snowflakesContainer = document.body;
-  const snowflakeCount = 30; // количество снежинок
+  const snowflakeCount = 25; // количество снежинок
   const sizes = ['size-small', 'size-medium', 'size-large'];
   
   for (let i = 0; i < snowflakeCount; i++) {
     const snowflake = document.createElement('div');
-    snowflake.className = `snowflake ${sizes[Math.floor(Math.random() * sizes.length)]}`;
-    snowflake.innerHTML = '❄️';
-    snowflake.style.left = Math.random() * 100 + '%';
-    snowflake.style.animationDelay = Math.random() * 20 + 's';
-    snowflake.style.opacity = Math.random() * 0.5 + 0.4;
+    const sizeClass = sizes[Math.floor(Math.random() * sizes.length)];
+    snowflake.className = `snowflake ${sizeClass}`;
+    snowflake.textContent = '❄';
+    
+    // Random horizontal position
+    const leftPercent = Math.random() * 100;
+    snowflake.style.left = leftPercent + '%';
+    
+    // Random animation delay
+    const delay = Math.random() * 8;
+    snowflake.style.animationDelay = delay + 's';
+    
     snowflakesContainer.appendChild(snowflake);
   }
 }
 
-// Initialize snowflakes when page loads
-document.addEventListener('DOMContentLoaded', createSnowflakes);
+// Initialize snowflakes as soon as script loads
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', createSnowflakes);
+} else {
+  createSnowflakes();
+}
 
 // build first game on load
 buildGrid();
