@@ -15,8 +15,8 @@ let ICONS = [
   // если добавите новые, укажите attribute: one of [инноватор, инженер, дизайнер, стратег, хакер, аналитик]
 ];
 
-// filter out non-image files (like ds-store)
-ICONS = ICONS.filter(i => /\.(svg|png|jpe?g|gif)$/i.test(i.url));
+// filter out items without text (legacy - for backward compatibility)
+// ICONS = ICONS.filter(i => i.text);
 
 const GRID_SIZE = 5;
 const TOTAL_CELLS = GRID_SIZE * GRID_SIZE;
@@ -245,14 +245,14 @@ const resultText = document.getElementById('resultText');
 const resultImage = document.getElementById('resultImage');
 
 function getSelectedIcons(){
-  // return array of {url, attribute} of marked cells (excluding center)
+  // return array of {text, attribute} of marked cells (excluding center)
   return cells.filter((c, idx) => c.marked && idx !== CENTER).map(c => {
-    const img = c.el.querySelector('img');
-    if (!img) return null;
-    const src = img.src || img.getAttribute('src');
-    // try to find attribute from ICONS by matching filename
-    const match = ICONS.find(i => src.endsWith(i.url));
-    return { url: src, attribute: match ? match.attribute : null };
+    const textDiv = c.el.querySelector('.cell-text');
+    if (!textDiv) return null;
+    const text = textDiv.innerText || textDiv.textContent;
+    // try to find attribute from ICONS by matching text
+    const match = ICONS.find(i => i.text === text);
+    return { text: text, attribute: match ? match.attribute : null };
   }).filter(Boolean);
 }
 
@@ -279,7 +279,7 @@ const RESULT_TEMPLATES = [
 function computeResult(){
   const sel = getSelectedIcons();
   // if no selection, base on ICONS pool
-  const pool = sel.length ? sel : ICONS.map(i => ({ url: i.url, attribute: i.attribute }));
+  const pool = sel.length ? sel : ICONS.map(i => ({ text: i.text, attribute: i.attribute }));
 
   // count attributes
   const counts = {};
