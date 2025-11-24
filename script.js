@@ -75,18 +75,18 @@ function buildGrid(){
     if (i === CENTER){
       // free space
       cell.classList.add("free", "marked");
-      const img = document.createElement("img");
-      img.src = "icons/minervasoft-logo-390.png";
-      img.alt = "Minervasoft";
-      img.title = "Minervasoft";
-      cell.appendChild(img);
+      const text = document.createElement("div");
+      text.className = "cell-text";
+      text.innerText = "Minervasoft";
+      text.title = "Minervasoft";
+      cell.appendChild(text);
     } else {
       const icon = pool[p++];
-      const img = document.createElement("img");
-      img.src = icon.url;
-      img.alt = icon.title;
-      img.title = icon.title;
-      cell.appendChild(img);
+      const text = document.createElement("div");
+      text.className = "cell-text";
+      text.innerText = icon.text;
+      text.title = icon.title;
+      cell.appendChild(text);
     }
 
     // click handler (center is already marked but still shouldn't toggle)
