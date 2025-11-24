@@ -1,10 +1,10 @@
 // local icons (auto-generated from files in ./icons/)
 let ICONS = [
-  { text: "Егор (любимый)", title: "Егор (любимый)", attribute: "инноватор" },
-  { text: "Егор", title: "Егор", attribute: "инноватор" },
-  { text: "Егор2", title: "Егор2", attribute: "инноватор" },
-  { text: "Егор3", title: "Егор3", attribute: "инноватор" },
-  { text: "Егор4", title: "Егор4", attribute: "инноватор" },
+  { text: "Корпоратив перенесли на январь", title: "Егор (любимый)", attribute: "инноватор" },
+  { text: "Вместо премии дали ветку", title: "Егор", attribute: "инноватор" },
+  { text: "Не успели забронировать площадку", title: "Егор2", attribute: "инноватор" },
+  { text: "Николай напьется и будет петь караоке", title: "Егор3", attribute: "инноватор" },
+  { text: """А нам хватит еды?""", title: "Егор4", attribute: "инноватор" },
   { text: "Тимофей", title: "Тимофей", attribute: "инноватор" },
   { text: "Тимофей2", title: "Тимофей2", attribute: "аналитик" },
   { text: "Тимофей3", title: "Тимофей3", attribute: "аналитик" },
