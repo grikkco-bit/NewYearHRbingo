@@ -17,11 +17,11 @@ html,body{height:100%}
 body{
   margin:0;
   font-family: Inter, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: linear-gradient(180deg, #0b6623 0%, #1a4d2e 50%, #c41e3a 100%);
+  background: linear-gradient(180deg, #0b6623 0%, #1a4d2e 50%, #ffffff69 100%);
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:24px;
+  padding:20px;
   color:#111827;
   position: relative;
   overflow-x: hidden;
@@ -74,28 +74,35 @@ body::after {
 
 .snowflake {
   position: fixed;
+  top: -50px; /* start above the viewport so they are visible immediately */
   pointer-events: none;
-  font-size: 20px;
+  font-size: 36px;
   z-index: 5;
   opacity: 1;
   color: #ffffff;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
   white-space: nowrap;
+  will-change: transform, top, opacity;
+  /* keep the 0% keyframe styles applied during animation-delay */
+  animation-fill-mode: both;
 }
 
 .snowflake.size-small {
   font-size: 20px;
   animation: snowfall-fast 12s linear infinite;
+  animation-fill-mode: both;
 }
 
 .snowflake.size-medium {
   font-size: 32px;
   animation: snowfall 16s linear infinite;
+  animation-fill-mode: both;
 }
 
 .snowflake.size-large {
   font-size: 48px;
   animation: snowfall-slow 18s linear infinite;
+  animation-fill-mode: both;
 }
 
 .container{
@@ -104,6 +111,18 @@ body::after {
   text-align:center;
   position: relative;
   z-index: 100;
+}
+
+/* Footer under the grid */
+.footer{
+  margin-top: 8px;
+  color: #0b6623; /* use dark green for contrast on light bottom gradient */
+  text-align: center;
+  font-size: 16px;
+}
+.footer small{
+  opacity:0.95;
+  color: inherit;
 }
 
 h1{
@@ -177,10 +196,10 @@ button:hover{opacity:0.95; box-shadow:0 6px 20px rgba(196, 30, 58, 0.4)}
 .cell-text{
   position: relative;
   z-index: 1;
-  font-size: clamp(12px, 3vw, 18px);
+  font-size: clamp(12px, 3vw, 14px);
   font-weight: 600;
   text-align: center;
-  padding: 12px;
+  padding: 8px;
   word-break: break-word;
   line-height: 1.3;
   color: #0b6623;
@@ -197,7 +216,7 @@ button:hover{opacity:0.95; box-shadow:0 6px 20px rgba(196, 30, 58, 0.4)}
 .cell .overlay{
   position:absolute;
   inset:0;
-  background: linear-gradient(180deg, rgba(196, 30, 58, 0.2), rgba(255, 215, 0, 0.15));
+  background: linear-gradient(180deg, #c41e3a62 , rgba(255, 215, 0, 0.15));
   opacity:0;
   transition:opacity .14s ease;
   display:flex;

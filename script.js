@@ -1,17 +1,21 @@
 // local icons (auto-generated from files in ./icons/)
 let ICONS = [
-  { text: "Корпоратив перенесли на январь", title: "Егор (любимый)", attribute: "инноватор" },
-  { text: "Вместо премии дали ветку", title: "Егор", attribute: "инноватор" },
-  { text: "Не успели забронировать площадку", title: "Егор2", attribute: "инноватор" },
-  { text: "Николай напьется и будет петь караоке", title: "Егор3", attribute: "инноватор" },
-  { text: "А нам хватит еды?", title: "Егор4", attribute: "инноватор" },
-  { text: "А премия будет?", title: "Тимофей", attribute: "инноватор" },
-  { text: "Нам не нравится этот ваш маскарад", title: "Тимофей2", attribute: "аналитик" },
-  { text: "Что подарить детям", title: "Тимофей3", attribute: "аналитик" },
-  { text: "111", title: "Тимофей4", attribute: "аналитик" },
-  { text: "2222", title: "Тимофей5", attribute: "аналитик" },
-  { text: "333", title: "тимофей6", attribute: "аналитик" },
-  { text: "444", title: "тимофей7", attribute: "аналитик" },
+  { text: "Корпоратив перенесли на январь", title: "Январь", attribute: "организаторы" },
+  { text: "Бюджет на корпоратив выдали в ветках", title: "Бюджет", attribute: "организаторы" },
+  { text: "Все площадки забронировали..", title: "Площадки", attribute: "организаторы" },
+  { text: "Кто-то напьется и будет петь караоке", title: "Караоке", attribute: "люди" },
+  { text: "А нам хватит еды?", title: "Еда", attribute: "организаторы" },
+  { text: "А премия будет?", title: "Премия", attribute: "деньги" },
+  { text: "Нам не нравится этот ваш маскарад", title: "Маскарад", attribute: "люди" },
+  { text: "Хочу детский подарок, но у меня нет ребенка", title: "Подарок", attribute: "деньги" },
+  { text: "А тайный санта будет?", title: "Тайный санта", attribute: "санта" },
+  { text: "Хочу +1 на корпоратив!", title: "+1", attribute: "люди" },
+  { text: "А мы работаем 31?", title: "31 декабря", attribute: "организаторы" },
+  { text: "Когда будут фотки?", title: "Фотки", attribute: "организаторы" },
+  { text: "Зарплату раньше заплатят?", title: "Зарплата", attribute: "деньги" },
+  { text: "Можно начать сразу утром?", title: "Утро", attribute: "люди" },
+  { text: "Можно не пить за «успех компании» — я уже за всё выпил?", title: "2026", attribute: "люди" },
+  { text: "Включу свой плейлист?", title: "Плейлист", attribute: "люди" },
   // если добавите новые, укажите attribute: one of [инноватор, инженер, дизайнер, стратег, хакер, аналитик]
 ];
 
@@ -21,6 +25,7 @@ let ICONS = [
 const GRID_SIZE = 4;
 const TOTAL_CELLS = GRID_SIZE * GRID_SIZE;
 const CENTER = -1; // 4x4 не имеет центра, используем -1
+const REQUIRED_SELECTIONS = 5; // number of selections required to show result
 
 const bingoEl = document.getElementById("bingo");
 const newGameBtn = document.getElementById("newGameBtn");
@@ -95,13 +100,21 @@ function toggleCell(index){
   const cellObj = cells[index];
   const el = cellObj.el;
   // in 4x4, no limit on selection count - select all 16 cells
-  
+  // prevent selecting more than REQUIRED_SELECTIONS
+  const currentlySelected = cells.filter(c => c.marked).length;
+  if (!cellObj.marked && currentlySelected >= REQUIRED_SELECTIONS) {
+    // brief pulse feedback
+    el.style.transform = 'scale(0.98)';
+    setTimeout(()=> el.style.transform = '', 120);
+    return;
+  }
+
   cellObj.marked = !cellObj.marked;
   el.classList.toggle("marked", cellObj.marked);
   // if we've reached exactly 3 selections, auto-show result
   const afterSelected = cells.filter(c => c.marked).length;
   updateSelectionCounter();
-  if (afterSelected === 3) {
+  if (afterSelected === REQUIRED_SELECTIONS) {
     setTimeout(()=> showResultModal(false), 220);
   }
   checkWin();
@@ -110,7 +123,7 @@ function toggleCell(index){
 function updateSelectionCounter(){
   if (!selectionCounterEl) return;
   const count = cells.filter(c => c.marked).length;
-  selectionCounterEl.innerText = `Выбрано ${count}/3`;
+  selectionCounterEl.innerText = `Выбрано ${count}/${REQUIRED_SELECTIONS}`;
 }
 
 function getMarkedMatrix(){
@@ -252,12 +265,10 @@ function hashStrings(arr){
 }
 
 const RESULT_TEMPLATES = [
-  { attribute: 'инноватор', title: 'Ты и Егор', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
-  { attribute: 'инженер', title: 'Ты и Ярослав', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
-  { attribute: 'дизайнер', title: 'Ты и Саша Соболев', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
-  { attribute: 'стратег', title: 'Ты и Рома', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
-  { attribute: 'хакер', title: 'Ты и Саша Никольский', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' },
-  { attribute: 'аналитик', title: 'Ты и Тимофей', text: 'Ваш юмор совпадает, так что присылай мемы в чат без стеснения', img: 'icons/fototeam.png' }
+  { attribute: 'люди', title: 'Твоя забота - люди!', text: 'Они приходят к тебе со своими вопросами и знают, что ты всегда поможешь' },
+  { attribute: 'деньги', title: 'Ты решаешь по финансам, я прав?', text: 'Деньги и что на них можно купить хранишь именно ты, без тебя бы ничего не случилось!' },
+  { attribute: 'организаторы', title: 'Вокруг тебя и создается праздник!', text: 'Ты тот самый многорукий организатор - незаменимый человек в Новогоднем корпоративе' },
+  
 ];
 
 function computeResult(){
@@ -280,31 +291,23 @@ function computeResult(){
   // top attribute(s)
   const top = proportions.filter(p => p.count === proportions[0].count).map(p => p.attribute);
 
-  // Build result: if single top -> use template for that attribute, else mixed
-  if (top.length === 1) {
-    const attr = top[0];
-    const tmpl = RESULT_TEMPLATES.find(t => t.attribute === attr) || RESULT_TEMPLATES[0];
-    return {
-      title: tmpl.title,
-      text: `${tmpl.text} Пропорция: ${Math.round(proportions[0].pct * 100)}% ${attr}.`,
-      img: tmpl.img
-    };
-  } else {
-    // mixed result
-    const names = top.join(' & ');
-    return {
-      title: `Смесь: ${names}`,
-      text: `У вас смешанный профиль: ${top.map(t => `${t} (${(counts[t]/total*100).toFixed(0)}%)`).join(', ')}.`,
-      img: 'icons/star.svg'
-    };
+  // Always choose the top attribute (no mixed results) - pick the attribute with highest count
+  if (proportions.length === 0) {
+    return { title: RESULT_TEMPLATES[0].title, text: RESULT_TEMPLATES[0].text, img: null };
   }
+  const topAttr = proportions[0].attribute;
+  const tmpl = RESULT_TEMPLATES.find(t => t.attribute === topAttr) || RESULT_TEMPLATES[0];
+  return { title: tmpl.title, text: tmpl.text, img: null };
 }
 
 function showResultModal(isWin = false){
   const res = computeResult();
   resultTitle.innerText = res.title + (isWin ? ' — БИНГО!' : '');
   resultText.innerText = res.text;
-  resultImage.src = res.img || 'icons/fototeam.png';
+  // hide image in result output as requested
+  if (resultImage) {
+    resultImage.style.display = 'none';
+  }
   resultModal.setAttribute('aria-hidden','false');
 }
 
@@ -315,18 +318,189 @@ function closeModal(){
 if (showResultBtn) {
   showResultBtn.addEventListener('click', () => showResultModal(false));
 }
-closeResultBtn.addEventListener('click', closeModal);
-shareResultBtn.addEventListener('click', () => {
-  // try Web Share API or fallback to copying text
+// close buttons should close modal and reset selections
+closeResultBtn.addEventListener('click', () => {
+  closeModal();
+  resetSelections();
+});
+
+closeBtn.addEventListener('click', () => {
+  closeModal();
+  resetSelections();
+});
+
+// handle sharing: save image, copy image and text to clipboard, show toast
+async function shareResult() {
   const res = computeResult();
   const shareText = `${res.title}: ${res.text}`;
-  if (navigator.share) {
-    navigator.share({ title: res.title, text: res.text }).catch(()=>{});
-  } else {
-    navigator.clipboard?.writeText(shareText).then(()=> alert('Результат скопирован в буфер обмена'));
+
+  // create canvas snapshot
+  const w = 900, h = 480;
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  // background: mimic main game colors (green -> dark green -> red)
+  const g = ctx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0, '#0b6623');
+  g.addColorStop(0.5, '#1a4d2e');
+  g.addColorStop(1, '#c41e3a');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,w,h);
+
+  // draw decorative snowflakes on background
+  const snowCount = 60;
+  for (let i = 0; i < snowCount; i++) {
+    const sx = Math.random() * w;
+    const sy = Math.random() * h;
+    const r = Math.random() * 3 + (i % 8 === 0 ? 3 : 0);
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${0.6 + Math.random()*0.4})`;
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.fill();
   }
-});
-closeBtn.addEventListener('click', closeModal);
+
+  // draw semi-transparent panel for text for readability
+  const panelX = 60, panelY = 60, panelW = w - 120, panelH = h - 160;
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  const radius = 12;
+  roundRect(ctx, panelX, panelY, panelW, panelH, radius, true, false);
+
+  // title
+  ctx.fillStyle = '#0b6623';
+  ctx.font = '700 28px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  wrapText(ctx, res.title, w/2, panelY + 48, panelW - 40, 36);
+
+  // body text
+  ctx.fillStyle = '#111';
+  ctx.font = '400 20px Arial, sans-serif';
+  ctx.textAlign = 'left';
+  wrapText(ctx, res.text, panelX + 20, panelY + 110, panelW - 40, 28);
+
+  // footer credit
+  ctx.fillStyle = '#aaaaaaff';
+  ctx.font = '600 14px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Создано @HR_weekend', w/2, h - 24);
+
+  // convert to blob and trigger download + clipboard
+  canvas.toBlob(async (blob) => {
+    if (!blob) return;
+    // trigger download
+    try {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'minerva-result.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.warn('Download failed', e);
+    }
+
+    // try to copy image to clipboard
+    let copiedImage = false;
+    if (navigator.clipboard && window.ClipboardItem) {
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        copiedImage = true;
+      } catch (e) {
+        // image copy failed
+        copiedImage = false;
+      }
+    }
+
+    // always copy text to clipboard as fallback/extra
+    try {
+      await navigator.clipboard.writeText(shareText);
+    } catch (e) {
+      console.warn('Text copy failed', e);
+    }
+
+    showCopyToast('Результат скопирован');
+  }, 'image/png');
+}
+
+shareResultBtn.addEventListener('click', shareResult);
+
+// helper: wrap text on canvas
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+  let curY = y;
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    const testWidth = metrics.width;
+    if (testWidth > maxWidth && n > 0) {
+      ctx.fillText(line.trim(), x, curY);
+      line = words[n] + ' ';
+      curY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line.trim(), x, curY);
+}
+
+// helper: draw rounded rectangle
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  if (typeof radius === 'number') {
+    radius = {tl: radius, tr: radius, br: radius, bl: radius};
+  } else {
+    const defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+    for (const side in defaultRadius) radius[side] = radius[side] || defaultRadius[side];
+  }
+  ctx.beginPath();
+  ctx.moveTo(x + radius.tl, y);
+  ctx.lineTo(x + width - radius.tr, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+  ctx.lineTo(x + width, y + height - radius.br);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+  ctx.lineTo(x + radius.bl, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+  ctx.lineTo(x, y + radius.tl);
+  ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+  ctx.closePath();
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
+}
+
+// small toast inside modal
+function showCopyToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'copy-toast';
+  toast.innerText = message;
+  // style inline to avoid CSS edits
+  toast.style.position = 'fixed';
+  toast.style.left = '50%';
+  toast.style.transform = 'translateX(-50%)';
+  toast.style.bottom = '24px';
+  toast.style.background = 'rgba(17,24,39,0.9)';
+  toast.style.color = 'white';
+  toast.style.padding = '8px 14px';
+  toast.style.borderRadius = '8px';
+  toast.style.zIndex = 2000;
+  toast.style.fontWeight = '600';
+  document.body.appendChild(toast);
+  setTimeout(()=> { toast.style.transition = 'opacity 0.3s'; toast.style.opacity = '0'; }, 1600);
+  setTimeout(()=> toast.remove(), 2000);
+}
+
+// Reset current selections and highlights
+function resetSelections() {
+  hasWon = false;
+  cells.forEach(c => {
+    c.marked = false;
+    if (c.el) {
+      c.el.classList.remove('marked');
+      c.el.classList.remove('win');
+    }
+  });
+  updateSelectionCounter();
+}
 
 // Create animated snowflakes
 function createSnowflakes() {
