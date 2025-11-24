@@ -270,9 +270,9 @@ button:hover{opacity:0.95; box-shadow:0 6px 20px rgba(196, 30, 58, 0.4)}
   button{padding:8px 12px}
   /* reduce text size and padding for mobile */
   .cell-text{
-    font-size: clamp(10px, 2vw, 12px);
-    padding: 6px 4px;
-    line-height: 1.2;
+    font-size: clamp(9px, 1.8vw, 11px);
+    padding: 4px 3px;
+    line-height: 1.1;
   }
 }
 
